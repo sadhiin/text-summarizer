@@ -3,9 +3,9 @@ import yaml
 from pathlib import Path
 from box import ConfigBox
 from ensure import ensure_annotations
-from box.exceptions import BoxValidationError
+from box.exceptions import BoxValueError
 from src.textSummarizer.logging import create_logger
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List, Union, Optional
 
 logger = create_logger(__name__)
 
@@ -19,7 +19,7 @@ def read_yaml(path_to_yaml: Path)->ConfigBox:
         with open(path_to_yaml, 'r') as stream:
             config = yaml.safe_load(stream)
             return ConfigBox(config)
-    except BoxValidationError as e:
+    except BoxValueError as e:
         logger.error(f"Error validating yaml file: {e}")
         return None
     except Exception as e:
