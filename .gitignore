@@ -179,3 +179,5 @@ dataset/*
 
 .DS_Store
 *.csv
+
+artifacts/data_ingestion
