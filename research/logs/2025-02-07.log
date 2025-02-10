@@ -1,0 +1,2 @@
+2025-02-07 18:09:27,996 - src.textSummarizer.utils.common - ERROR - common.py - 26 - Error reading yaml file: [Errno 2] No such file or directory: 'config/config.yaml'
+2025-02-07 18:10:10,205 - src.textSummarizer.utils.common - ERROR - common.py - 26 - Error reading yaml file: [Errno 2] No such file or directory: 'config/config.yaml'

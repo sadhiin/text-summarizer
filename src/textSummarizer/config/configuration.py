@@ -1,7 +1,7 @@
 import os
 from src.textSummarizer.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH
 from src.textSummarizer.utils.common import read_yaml, create_directories
-from src.textSummarizer.entity import DataIngestionConfig
+from src.textSummarizer.entity import DataIngestionConfig, DataTrasformationConfig
 from src.textSummarizer.logging import create_logger
 logger = create_logger(__name__)
 
@@ -31,4 +31,19 @@ class CofigurationManager:
             return None
         except Exception as e:
             logger.error(f"Error in creating DataIngestionConfig: {e}")
+            return None
+    
+    def get_data_transformation_config(self)-> DataTrasformationConfig:
+        try:
+            config = self.config.data_transformation
+            
+            os.makedirs(self.config.artifact_root, exist_ok=True)
+            
+            return DataTrasformationConfig(
+                root_dir = config.root_dir,
+                data_path = config.data_path,
+                tokenizer_name = config.tokenizer_name
+            )
+        except Exception as e:
+            logger.error(f"Error in creating DataTransformationConfig: {e}")
             return None

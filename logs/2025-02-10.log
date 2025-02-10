@@ -1,0 +1,7 @@
+2025-02-10 14:44:55,685 - __main__ - INFO - main.py - 10 - 🏃🏼‍➡️🏃🏼‍➡️🏃🏼‍➡️ Starting Data Ingestion Stage 🏃🏼‍➡️🏃🏼‍➡️🏃🏼‍➡️
+2025-02-10 14:44:55,687 - src.textSummarizer.components.data_ingestion - INFO - data_ingestion.py - 18 - Creating the directory artifacts/data_ingestion/summarizer-data.zip
+2025-02-10 14:44:55,688 - src.textSummarizer.components.data_ingestion - INFO - data_ingestion.py - 25 - Downloading data from https://github.com/krishnaik06/datasets/raw/refs/heads/main/summarizer-data.zip
+2025-02-10 14:44:56,285 - src.textSummarizer.components.data_ingestion - INFO - data_ingestion.py - 48 - Extracting zip file to artifacts/data_ingestion
+2025-02-10 14:44:56,286 - __main__ - INFO - main.py - 13 - ✅✅✅ Completed Data Ingestion Stage ✅✅✅
+2025-02-10 14:44:56,286 - __main__ - INFO - main.py - 17 - 🏃🏼‍➡️🏃🏼‍➡️🏃🏼‍➡️ Starting Data Trasnformation Stage 🏃🏼‍➡️🏃🏼‍➡️🏃🏼‍➡️
+2025-02-10 14:45:06,123 - __main__ - INFO - main.py - 20 - ✅✅✅ Completed Data Trasnformation Stage ✅✅✅
