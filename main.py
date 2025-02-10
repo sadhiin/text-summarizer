@@ -1,5 +1,6 @@
 from src.textSummarizer.pipeline import DataIngestionPipeline
 from src.textSummarizer.pipeline import DataTransformationPipeline
+from src.textSummarizer.pipeline import ModelTrainerPipeline
 from src.textSummarizer.logging import create_logger
 logger = create_logger(__name__)
 
@@ -16,6 +17,12 @@ def main():
         STAGE_NAME = "Data Trasnformation Stage"
         logger.info(f"🏃🏼‍➡️🏃🏼‍➡️🏃🏼‍➡️ Starting {STAGE_NAME} 🏃🏼‍➡️🏃🏼‍➡️🏃🏼‍➡️")
         pipeline = DataTransformationPipeline()
+        pipeline.run()
+        logger.info(f"✅✅✅ Completed {STAGE_NAME} ✅✅✅")
+        
+        STAGE_NAME = "Model Training Stage"
+        logger.info(f"🏃🏼‍➡️🏃🏼‍➡️🏃🏼‍➡️ Starting {STAGE_NAME} 🏃🏼‍➡️🏃🏼‍➡️🏃🏼‍➡️")
+        pipeline = ModelTrainerPipeline()
         pipeline.run()
         logger.info(f"✅✅✅ Completed {STAGE_NAME} ✅✅✅")
         

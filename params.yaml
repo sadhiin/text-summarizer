@@ -1,5 +1,5 @@
 TrainingArguments:
-  output_dir: pegasus_samsum
+  output_dir: artifacts/model_pegasus_samsum
   num_train_epochs: 1
   warmup_steps: 500
   per_device_train_batch_size: 1
@@ -9,5 +9,5 @@ TrainingArguments:
   logging_steps: 10
   evaluation_strategy: steps
   eval_steps: 500
-  save_steps: 1e6
+  save_steps: 999
   gradient_accumulation_steps: 16

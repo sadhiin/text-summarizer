@@ -1,7 +1,7 @@
 import os
 from src.textSummarizer.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH
 from src.textSummarizer.utils.common import read_yaml, create_directories
-from src.textSummarizer.entity import DataIngestionConfig, DataTrasformationConfig
+from src.textSummarizer.entity import DataIngestionConfig, DataTrasformationConfig, ModelTrainerConfig
 from src.textSummarizer.logging import create_logger
 logger = create_logger(__name__)
 
@@ -46,4 +46,33 @@ class CofigurationManager:
             )
         except Exception as e:
             logger.error(f"Error in creating DataTransformationConfig: {e}")
+            return None
+        
+    def get_model_trainer_config(self)-> ModelTrainerConfig:
+        try:
+            config = self.config.model_trainer
+            params = self.params.TrainingArguments
+            
+            os.makedirs(config.root_dir, exist_ok=True)
+            print(f"Config from Configmanager: {config}")
+            
+            return ModelTrainerConfig(
+                root_dir = config.root_dir,
+                data_path = config.data_path,
+                model_ckpt = config.model_ckpt,
+                output_dir = params.output_dir,
+                num_train_epochs = params.num_train_epochs,
+                warmup_steps = params.warmup_steps,
+                per_device_train_batch_size = params.per_device_train_batch_size,
+                per_device_eval_batch_size = params.per_device_eval_batch_size,
+                logging_dir = params.logging_dir,
+                weight_decay = params.weight_decay,
+                logging_steps = params.logging_steps,
+                evaluation_strategy = params.evaluation_strategy,
+                eval_steps = params.eval_steps,
+                save_steps = params.save_steps,
+                gradient_accumulation_steps = params.gradient_accumulation_steps
+            )
+        except Exception as e:
+            logger.error(f"Error in creating ModelTrainerConfig: {e}")
             return None
