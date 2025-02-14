@@ -1,6 +1,7 @@
 from src.textSummarizer.pipeline import DataIngestionPipeline
 from src.textSummarizer.pipeline import DataTransformationPipeline
 from src.textSummarizer.pipeline import ModelTrainerPipeline
+from src.textSummarizer.pipeline import ModelEvaluationPipeline
 from src.textSummarizer.logging import create_logger
 logger = create_logger(__name__)
 import torch
@@ -33,6 +34,16 @@ def main():
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
         
+        gc.collect()
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+        STAGE_NAME = "Model Evaluation Stage"
+        logger.info(f"🏃🏼‍➡️🏃🏼‍➡️🏃🏼‍➡️ Starting {STAGE_NAME} 🏃🏼‍➡️🏃🏼‍➡️🏃🏼‍➡️")
+        pipeline = ModelEvaluationPipeline()
+        pipeline.run()
+        logger.info(f"✅✅✅ Completed {STAGE_NAME} ✅✅✅")
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
         
     except Exception as e:
         logger.error(f"Error in {STAGE_NAME}: {e}")

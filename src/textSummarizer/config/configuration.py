@@ -1,7 +1,7 @@
 import os
 from src.textSummarizer.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH
 from src.textSummarizer.utils.common import read_yaml, create_directories
-from src.textSummarizer.entity import DataIngestionConfig, DataTrasformationConfig, ModelTrainerConfig
+from src.textSummarizer.entity import DataIngestionConfig, DataTrasformationConfig, ModelTrainerConfig, ModelEvaluationConfig
 from src.textSummarizer.logging import create_logger
 logger = create_logger(__name__)
 
@@ -75,4 +75,21 @@ class CofigurationManager:
             )
         except Exception as e:
             logger.error(f"Error in creating ModelTrainerConfig: {e}")
+            return None
+    
+    
+    def get_model_evaluation_config(self) -> ModelEvaluationConfig:
+        try:
+            config = self.config.model_evaluation
+            os.makedirs(config.root_dir, exist_ok=True)
+            
+            return ModelEvaluationConfig(
+                root_dir=config.root_dir,
+                data_path=config.data_path,
+                model_path=config.model_path,
+                tokenizer_path=config.tokenizer_path,
+                metric_file_name=config.metric_file_name
+            )
+        except Exception as e:
+            logger.error(f"Error in creating ModelEvaluationConfig: {e}")
             return None
