@@ -28,10 +28,10 @@ async def read_root():
 async def health():
     return {"status": "ok"}
 
-@app.get('/train')
-async def train():
-    os.system('python main.py')
-    return Response(content='Training Completed')
+# @app.get('/train')
+# async def train():
+#     os.system('python main.py')
+#     return Response(content='Training Completed')
 
 
 @app.post("/get_summary", tags=['authentications'])
