@@ -1,24 +1,26 @@
 import os, sys
+from fastapi import FastAPI, HTTPException
+from fastapi import Body
 from fastapi.templating import Jinja2Templates
 from starlette.responses import RedirectResponse
 from fastapi.responses import Response
-from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from src.textSummarizer.pipeline import PredictionPipeline
 
 app = FastAPI()
-## allows cors
 
+## allows cors
 origins = ["*"]
 
 app.add_middleware(
-    CORSMiddleware, 
-    allow_origins=origins, 
-    allow_credentials=True, 
-    allow_methods=["*"], 
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
+pipeline = PredictionPipeline()
 
 @app.get("/", tags=['authentications'])
 async def read_root():
@@ -28,17 +30,17 @@ async def read_root():
 async def health():
     return {"status": "ok"}
 
-# @app.get('/train')
-# async def train():
-#     os.system('python main.py')
-#     return Response(content='Training Completed')
 
 
 @app.post("/get_summary", tags=['authentications'])
-async def get_summary(text):
+async def get_summary(text: str = Body(..., embed=True)):
+    # Validate input
+    if not text or not isinstance(text, str):
+        raise HTTPException(status_code=400, detail="Invalid input: text must be a non-empty string.")
+
     try:
-        out = PredictionPipeline().prediction(text)
-        
+        out = pipeline.prediction(text)
+
         return {'prediction': out}
     except Exception as e:
         import traceback
