@@ -1,6 +1,6 @@
 import os, sys
 from fastapi.templating import Jinja2Templates
-from starlette.requests import RedirectResponse
+from starlette.responses import RedirectResponse
 from fastapi.responses import Response
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -41,6 +41,8 @@ async def get_summary(text):
         
         return {'prediction': out}
     except Exception as e:
+        import traceback
+        print(traceback.format_exc())
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__=="__main__":
